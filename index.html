@@ -1,0 +1,109 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deploy PRINCE XMD to Heroku</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --main-color: #0ff;
+    }body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Arial', sans-serif;
+  color: white;
+  background-color: black;
+}
+
+#bg-video {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px var(--main-color);
+  text-align: center;
+  transition: box-shadow 1s ease;
+}
+
+input, button {
+  padding: 10px;
+  font-size: 18px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+}
+
+button {
+  background: var(--main-color);
+  color: black;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #08c;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <video autoplay muted loop id="bg-video">
+      <source src="background.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video><div class="overlay">
+  <h1>🚀 Deploy PRINCE XMD to Heroku</h1>
+  <p>Step 1: Fork this repo → <a href="https://github.com/Pkdriller/NEXUS-XMD/fork" target="_blank">Click to Fork</a></p>
+
+  <p>Step 2: Enter your GitHub username:</p>
+  <input type="text" id="username" placeholder="Your GitHub username" />
+  <button onclick="generateLink()">Generate Heroku Deploy Link</button>
+
+  <div id="output"></div>
+</div>
+
+  </div>  <script>
+    function generateLink() {
+      const username = document.getElementById('username').value.trim();
+      if (!username) {
+        alert("Please enter your GitHub username.");
+        return;
+      }
+      const repo = 'NEXUS-XMD';
+      const herokuLink = `https://heroku.com/deploy?template=https://github.com/${username}/${repo}`;
+      document.getElementById('output').innerHTML = `
+        <a href="${herokuLink}" target="_blank">
+          <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" />
+        </a>
+      `;
+    }
+
+    // 🎨 Dynamic color changer
+    const colors = ['#0ff', '#f0f', '#ff0', '#0f0', '#f00', '#00f'];
+    let index = 0;
+    setInterval(() => {
+      document.documentElement.style.setProperty('--main-color', colors[index]);
+      index = (index + 1) % colors.length;
+    }, 2000);
+  </script></body>
+</html>
